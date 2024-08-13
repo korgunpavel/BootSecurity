@@ -1,6 +1,7 @@
 package com.korgun.springcourse.SecurityApp.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -18,14 +19,16 @@ public class Person {
     @Column(name = "username")
     String username;
 
-    @NotNull
-    @Size(min = 1900, message = "Year of birth min = 1900")
+    @Min(value = 1900, message = "Year of birth min = 1900")
     @Column(name = "year_of_birth")
     int yearOfBirth;
 
     @NotEmpty(message = "Password should be not empty")
     @Column(name = "password")
     String password;
+
+    @Column(name = "role")
+    String role;
 
     public Person() {}
 
@@ -51,13 +54,12 @@ public class Person {
         this.username = username;
     }
 
-    @NotNull
-    @Size(min = 1900, message = "Year of birth min = 1900")
+    @Min(value = 1900, message = "Year of birth min = 1900")
     public int getYearOfBirth() {
         return yearOfBirth;
     }
 
-    public void setYearOfBirth(@NotNull @Size(min = 1900, message = "Year of birth min = 1900") int yearOfBirth) {
+    public void setYearOfBirth(@Min(value = 1900, message = "Year of birth min = 1900") int yearOfBirth) {
         this.yearOfBirth = yearOfBirth;
     }
 
@@ -69,6 +71,14 @@ public class Person {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -76,6 +86,7 @@ public class Person {
                 ", username='" + username + '\'' +
                 ", yearOfBirth=" + yearOfBirth +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
